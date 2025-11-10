@@ -1,0 +1,21 @@
+---
+- # ====== List of Values: PHOENIX_MENU.MENU_NAME ==============
+  id: 13371354654081884
+  identification: 
+    name: PHOENIX_MENU.MENU_NAME
+
+  subscription: 
+    version-number: 20650799
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: PHOENIX_MENU
+
+  column-mapping: 
+    return: MENU_ID
+    display: MENU_NAME
+    default-sort: MENU_NAME
+    sort-direction: Ascending (Nulls Last)
+

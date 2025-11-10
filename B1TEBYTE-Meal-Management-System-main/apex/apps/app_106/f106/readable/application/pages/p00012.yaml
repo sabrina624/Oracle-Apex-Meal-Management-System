@@ -1,0 +1,1098 @@
+---
+# ====== Page: Daily Employee List ===========================
+id: 12
+identification: 
+  name: Daily Employee List
+  alias: DAILY-EMPLOYEE-LIST
+  title: Daily Employee List
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Daily Employee List =========================
+  id: 14923010097568533
+  identification: 
+    name: Daily Employee List
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      SELECT EMPLOYEE_ID,
+             EMP_CODE,
+             TO_CHAR(DATE_VALUE, 'MM/DD/YYYY') AS DATE_VALUE,
+             TOTAL_MEALS,
+             PER_MEAL_COST,
+             TOTAL_MEAL_COST,
+             DUE,
+             USER_ID,
+             ENTER_DATE
+        FROM INTERN.PHOENIX_DAILY_EMPLOYEE_INFORMATION
+       WHERE EMP_CODE = :P12_EMP_CODE
+         AND DATE_VALUE BETWEEN TO_DATE(:P12_START_DATE, 'MM/DD/YYYY')
+                            AND TO_DATE(:P12_END_DATE, 'MM/DD/YYYY')
+       ORDER BY DATE_VALUE;
+    page-items-to-submit: 
+    - P12_EMP_CODE
+    - P12_START_DATE
+    - P12_END_DATE
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 14923182252568533
+    link: 
+      link-column: Exclude Link Column
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: false
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: false
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 14932080821642040
+      identification: 
+        name: Primary Report
+        alias: 149321
+
+    columns: 
+    - # ====== Column: ENTER_DATE ==================================
+      id: 12858409093138740
+      identification: 
+        column-name: ENTER_DATE
+        type: Plain Text
+
+      heading: 
+        heading: Enter Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 20
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: DATE_VALUE ==================================
+      id: 12858923308138745
+      identification: 
+        column-name: DATE_VALUE
+        type: Plain Text
+
+      heading: 
+        heading: Date Value
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 50
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: EMPLOYEE_ID =================================
+      id: 14923873336568567
+      identification: 
+        column-name: EMPLOYEE_ID
+        type: Hidden
+
+      heading: 
+        heading: Employee ID
+
+      layout: 
+        sequence: 0
+
+      source: 
+        primary-key: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: EMP_CODE ====================================
+      id: 14924291299568567
+      identification: 
+        column-name: EMP_CODE
+        type: Plain Text
+
+      heading: 
+        heading: Emp Code
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 2
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_MEALS =================================
+      id: 14925814885568569
+      identification: 
+        column-name: TOTAL_MEALS
+        type: Plain Text
+
+      heading: 
+        heading: Total Meals
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 6
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: PER_MEAL_COST ===============================
+      id: 14926233191568569
+      identification: 
+        column-name: PER_MEAL_COST
+        type: Plain Text
+
+      heading: 
+        heading: Per Meal Cost
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 7
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_MEAL_COST =============================
+      id: 14926646328568569
+      identification: 
+        column-name: TOTAL_MEAL_COST
+        type: Plain Text
+
+      heading: 
+        heading: Total Meal Cost
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 8
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: DUE =========================================
+      id: 14927050785568570
+      identification: 
+        column-name: DUE
+        type: Plain Text
+
+      heading: 
+        heading: Due
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 9
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: USER_ID =====================================
+      id: 14927427720568570
+      identification: 
+        column-name: USER_ID
+        type: Hidden
+
+      heading: 
+        heading: User ID
+
+      layout: 
+        sequence: 10
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    printing: 
+      output: 
+        layout: Default Report Layout
+        view-file-as: Attachment
+
+      page: 
+        size: Letter
+        orientation: Landscape
+        units: Inches
+        width: 11
+        height: 8.5
+        border-width: 0.5
+        border-color: '#666666'
+
+      page-header: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+        page-header-text: Daily Employee List
+
+      column-headings: 
+        font: Helvetica
+        font-weight: Bold
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#EEEEEE'
+
+      columns: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#FFFFFF'
+
+      page-footer: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+
+page-items: 
+- # ====== Page Item: P12_EMP_CODE =============================
+  id: 14690613192624726
+  identification: 
+    name: P12_EMP_CODE
+    type: Select List
+
+  label: 
+    label: Emp Name
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: SELECT EMP_NAME, EMP_CODE FROM PHOENIX_HR_EMP_MASTER
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_START_DATE ===========================
+  id: 14690779147624727
+  identification: 
+    name: P12_START_DATE
+    type: Date Picker
+
+  label: 
+    label: Start Date
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_END_DATE =============================
+  id: 14692816782624748
+  identification: 
+    name: P12_END_DATE
+    type: Date Picker
+
+  label: 
+    label: End Date
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 30
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: Submit ======================================
+  id: 14690896770624728
+  identification: 
+    button-name: Submit
+    label: Submit
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--success
+    - t-Button--simple
+    - t-Button--padLeft
+    - t-Button--padTop
+    - t-Button--padBottom
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 12858561107138741
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P12_START_DATE
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 12858664986138742
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Daily Employee List # 14923010097568533
+
+    execution: 
+      sequence: 10
+      event: New # 12858561107138741
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: New_1 ===============================
+  id: 12858758443138743
+  identification: 
+    name: New_1
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P12_EMP_CODE
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 12858837648138744
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Daily Employee List # 14923010097568533
+
+    execution: 
+      sequence: 10
+      event: New_1 # 12858758443138743
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: TEST =======================================
+  id: 12859013279138746
+  identification: 
+    name: TEST
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+        CURSOR C1 IS
+          SELECT 
+              A.ATTENDANCE_DATE,
+      
+              -- Employee meal count
+              (CASE WHEN NVL(A.IS_TAKING_LUNCH, 'N') = 'Y' THEN 1 ELSE 0 END +
+               CASE WHEN NVL(A.IS_TAKING_DINNER, 'N') = 'Y' THEN 1 ELSE 0 END) AS EMP_MEALS,
+      
+              -- Budget info
+              NVL((SELECT B.DAILY_MEAL_COST
+                     FROM INTERN.PHOENIX_DAILY_BUDGET_TRACKER B
+                    WHERE B.MEAL_DATE = A.ATTENDANCE_DATE), 0) AS DAILY_MEAL_COST,
+      
+              NVL((SELECT B.EXTRA_COST
+                     FROM INTERN.PHOENIX_DAILY_BUDGET_TRACKER B
+                    WHERE B.MEAL_DATE = A.ATTENDANCE_DATE), 0) AS EXTRA_COST,
+      
+              NVL((SELECT B.TOTAL_MEALS
+                     FROM INTERN.PHOENIX_DAILY_BUDGET_TRACKER B
+                    WHERE B.MEAL_DATE = A.ATTENDANCE_DATE), 0) AS TOTAL_MEALS,
+      
+              -- Guest meals (count only)
+              NVL((SELECT SUM(G.GUEST_COUNT)
+                     FROM INTERN.PHOENIX_GUEST_MEAL_TRACKER G
+                    WHERE G.EMP_CODE = A.EMP_CODE
+                      AND TRUNC(G.GUEST_DATE) = TRUNC(A.ATTENDANCE_DATE)), 0) AS TOTAL_GUEST_COUNT
+      
+          FROM INTERN.PHOENIX_DAILY_ATTENDANCE A
+          WHERE A.EMP_CODE = :P12_EMP_CODE
+            AND A.ATTENDANCE_DATE BETWEEN TO_DATE(:P12_START_DATE) AND TO_DATE(:P12_END_DATE)
+          ORDER BY A.ATTENDANCE_DATE;
+      
+      BEGIN
+        FOR I IN C1 LOOP
+          DECLARE
+            v_due NUMBER := 0;
+            v_existing_count NUMBER := 0;
+            v_guest_cost NUMBER := 0;
+            v_per_meal NUMBER := 0;
+          BEGIN
+            ---------------------------------------------------------------------------
+            -- Step 1: Fetch per meal cost for this date
+            ---------------------------------------------------------------------------
+            SELECT NVL(DAILY_MEAL_COST,0)
+              INTO v_per_meal
+              FROM INTERN.PHOENIX_DAILY_BUDGET_TRACKER
+             WHERE MEAL_DATE = I.ATTENDANCE_DATE;
+      
+            ---------------------------------------------------------------------------
+            -- Step 2: Calculate guest cost (even if table doesn’t store it)
+            ---------------------------------------------------------------------------
+            SELECT NVL(SUM(NVL(G.TOTAL_GUEST_MEAL_COST,
+                               NVL(G.GUEST_COUNT,0) * NVL(G.PER_MEAL_COST, v_per_meal))), 0)
+              INTO v_guest_cost
+              FROM INTERN.PHOENIX_GUEST_MEAL_TRACKER G
+             WHERE G.EMP_CODE = :P12_EMP_CODE
+               AND TRUNC(G.GUEST_DATE) = TRUNC(I.ATTENDANCE_DATE);
+      
+            ---------------------------------------------------------------------------
+            -- Step 3: Calculate due (extra portion + guest cost)
+            ---------------------------------------------------------------------------
+            IF I.EXTRA_COST > 0 AND I.TOTAL_MEALS > 0 THEN
+              v_due := ROUND(I.EXTRA_COST * (I.EMP_MEALS / I.TOTAL_MEALS), 2);
+            ELSE
+              v_due := 0;
+            END IF;
+      
+            v_due := NVL(v_due, 0) + NVL(v_guest_cost, 0);
+      
+            ---------------------------------------------------------------------------
+            -- Step 4: Update or Insert record
+            ---------------------------------------------------------------------------
+            SELECT COUNT(*) INTO v_existing_count
+              FROM INTERN.PHOENIX_DAILY_EMPLOYEE_INFORMATION
+             WHERE EMP_CODE = :P12_EMP_CODE
+               AND DATE_VALUE = I.ATTENDANCE_DATE;
+      
+            IF v_existing_count > 0 THEN
+              UPDATE INTERN.PHOENIX_DAILY_EMPLOYEE_INFORMATION
+                 SET TOTAL_MEALS = I.EMP_MEALS + NVL(I.TOTAL_GUEST_COUNT, 0),
+                     PER_MEAL_COST = v_per_meal,
+                     TOTAL_MEAL_COST = ROUND(v_per_meal * 
+                                             (I.EMP_MEALS + NVL(I.TOTAL_GUEST_COUNT, 0)), 2),
+                     DUE = v_due,
+                     LAST_UPDATE = :APP_USER,
+                     LAST_UPDATE_DATE = SYSDATE
+               WHERE EMP_CODE = :P12_EMP_CODE
+                 AND DATE_VALUE = I.ATTENDANCE_DATE;
+            ELSE
+              INSERT INTO INTERN.PHOENIX_DAILY_EMPLOYEE_INFORMATION (
+                  EMPLOYEE_ID,
+                  EMP_CODE,
+                  DATE_VALUE,
+                  TOTAL_MEALS,
+                  PER_MEAL_COST,
+                  TOTAL_MEAL_COST,
+                  DUE,
+                  USER_ID,
+                  ENTER_DATE
+              )
+              VALUES (
+                  'EDI-' || LPAD(PHOENIX_DAILY_EMP_INFO_SEQ.NEXTVAL, 6, '0'),
+                  :P12_EMP_CODE,
+                  I.ATTENDANCE_DATE,
+                  I.EMP_MEALS + NVL(I.TOTAL_GUEST_COUNT, 0),
+                  v_per_meal,
+                  ROUND(v_per_meal * (I.EMP_MEALS + NVL(I.TOTAL_GUEST_COUNT, 0)), 2),
+                  v_due,
+                  :APP_USER,
+                  SYSDATE
+              );
+            END IF;
+      
+            DBMS_OUTPUT.PUT_LINE(
+              'Date: ' || TO_CHAR(I.ATTENDANCE_DATE,'DD-MON') ||
+              ' | Guest Meals=' || I.TOTAL_GUEST_COUNT ||
+              ' | Guest Cost=' || v_guest_cost ||
+              ' | Due=' || v_due
+            );
+      
+          END;
+        END LOOP;
+      
+        COMMIT;
+      
+      EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+          NULL;
+        WHEN OTHERS THEN
+          ROLLBACK;
+          RAISE_APPLICATION_ERROR(-20001, 'Error: ' || SQLERRM);
+      END;
+
+  execution: 
+    sequence: 20
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: Submit # 14690896770624728
+
+- # ====== Process: generate  ==================================
+  id: 14690942842624729
+  identification: 
+    name: 'generate '
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+        v_emp_code     VARCHAR2(30) := :P12_EMP_CODE;
+        v_start_date   DATE := TO_DATE(:P12_START_DATE);
+        v_end_date     DATE := TO_DATE(:P12_END_DATE);
+      BEGIN
+        /*-- Step 1: Delete any existing daily records for this employee within range
+        DELETE FROM INTERN.PHOENIX_DAILY_EMPLOYEE_INFORMATION
+         WHERE EMP_CODE = v_emp_code
+           AND DATE_VALUE BETWEEN v_start_date AND v_end_date;*/
+      
+        -- Step 2: Loop through attendance days within range
+        FOR rec IN (
+          SELECT 
+            TRUNC(a.ATTENDANCE_DATE) AS MEAL_DATE,
+            (CASE WHEN NVL(a.IS_TAKING_LUNCH, 'N') = 'Y' THEN 1 ELSE 0 END +
+             CASE WHEN NVL(a.IS_TAKING_DINNER, 'N') = 'Y' THEN 1 ELSE 0 END) AS EMP_MEALS
+          FROM INTERN.PHOENIX_DAILY_ATTENDANCE a
+          WHERE a.EMP_CODE = v_emp_code
+            AND a.ATTENDANCE_DATE BETWEEN v_start_date AND v_end_date
+          ORDER BY a.ATTENDANCE_DATE
+        ) LOOP
+          DECLARE
+            v_total_meals NUMBER := rec.EMP_MEALS;
+            v_extra_cost  NUMBER := 0;
+            v_per_cost    NUMBER := 0;
+            v_all_meals   NUMBER := 0;
+            v_due         NUMBER := 0;
+            v_guest_cost  NUMBER := 0;
+          BEGIN
+            ----------------------------------------------------------------
+            -- Step 3: Get budget info for that date
+            ----------------------------------------------------------------
+            BEGIN
+              SELECT NVL(DAILY_MEAL_COST, 0),
+                     NVL(EXTRA_COST, 0),
+                     NVL(TOTAL_MEALS, 0)
+                INTO v_per_cost, v_extra_cost, v_all_meals
+                FROM INTERN.PHOENIX_DAILY_BUDGET_TRACKER
+               WHERE MEAL_DATE= rec.MEAL_DATE;
+            EXCEPTION
+              WHEN NO_DATA_FOUND THEN
+                v_per_cost := 0;
+                v_extra_cost := 0;
+                v_all_meals := 0;
+            END;
+      
+            ----------------------------------------------------------------
+            -- Step 4: Compute due (extra + guest cost)
+            ----------------------------------------------------------------
+            IF v_extra_cost > 0 AND v_all_meals > 0 AND v_total_meals > 0 THEN
+              v_due := ROUND(v_extra_cost * (v_total_meals / v_all_meals), 2);
+            END IF;
+      
+            BEGIN
+              SELECT NVL(SUM(TOTAL_GUEST_MEAL_COST), 0)
+                INTO v_guest_cost
+                FROM INTERN.PHOENIX_GUEST_MEAL_TRACKER
+               WHERE EMP_CODE = v_emp_code
+                 AND TRUNC(GUEST_DATE) = rec.MEAL_DATE;
+            EXCEPTION
+              WHEN NO_DATA_FOUND THEN
+                v_guest_cost := 0;
+            END;
+      
+            v_due := v_due + v_guest_cost;
+      
+            ----------------------------------------------------------------
+            -- Step 5: Insert Final Row
+            ----------------------------------------------------------------
+            INSERT INTO INTERN.PHOENIX_DAILY_EMPLOYEE_INFORMATION (
+              EMPLOYEE_ID,
+              EMP_CODE,
+              DATE_VALUE,
+              TOTAL_MEALS,
+              PER_MEAL_COST,
+              TOTAL_MEAL_COST,
+              DUE,
+              USER_ID,
+              ENTER_DATE
+            ) VALUES (
+              'EDI-' || LPAD(PHOENIX_DAILY_EMP_INFO_SEQ.NEXTVAL, 6, '0'),
+              v_emp_code,
+              rec.MEAL_DATE,
+              v_total_meals,
+              v_per_cost,
+              ROUND(v_total_meals * v_per_cost, 2),
+              v_due,
+              NVL(:APP_USER, USER),
+              SYSDATE
+            );
+          END;
+        END LOOP;
+      
+        COMMIT;
+      
+      EXCEPTION
+        WHEN OTHERS THEN
+          ROLLBACK;
+          RAISE_APPLICATION_ERROR(-20001, 'Error processing daily data: ' || SQLERRM);
+      END;
+
+  execution: 
+    sequence: 10
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Never
+

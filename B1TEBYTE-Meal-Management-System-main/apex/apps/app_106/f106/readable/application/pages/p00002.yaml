@@ -1,0 +1,1060 @@
+---
+# ====== Page: Daily Budget Tracker ==========================
+id: 2
+identification: 
+  name: Daily Budget Tracker
+  alias: DAILY-BUDGET-TRACKER
+  title: Daily Budget Tracker
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Date Budget =================================
+  id: 14692361362624743
+  identification: 
+    name: Date Budget
+    title: Daily Budget
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Daily Budget Tracker ========================
+  id: 25632538559575187
+  identification: 
+    name: Daily Budget Tracker
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      SELECT 
+          B.ROWID,
+          B.TRACK_ID,
+          B.MEAL_DATE,
+          B.MONTH,
+          B.YEAR,
+          
+          -- Fetch live totals from Attendance table
+          (SELECT COUNT(*) 
+             FROM PHOENIX_DAILY_ATTENDANCE A 
+            WHERE A.ATTENDANCE_DATE = B.MEAL_DATE 
+              AND A.IS_TAKING_LUNCH = 'Y') AS TOTAL_LUNCH_COUNT,
+              
+          (SELECT COUNT(*) 
+             FROM PHOENIX_DAILY_ATTENDANCE A 
+            WHERE A.ATTENDANCE_DATE = B.MEAL_DATE 
+              AND A.IS_TAKING_DINNER = 'Y') AS TOTAL_DINNER_COUNT,
+      
+          -- Existing columns
+          B.TOTAL_MEALS,
+          B.DAILY_MEAL_COST,
+          B.COMPANY_SHARE,
+          B.EMPLOYEE_SHARE,
+          B.AVAILABLE_BUDGET,
+          B.REMAINING_BUDGET,
+          B.EXTRA_COST
+      FROM PHOENIX_DAILY_BUDGET_TRACKER B
+      ORDER BY B.MEAL_DATE;
+      
+
+  layout: 
+    sequence: 10
+    parent-region: Date Budget # 14692361362624743
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 25632617011575187
+    link: 
+      link-column: Exclude Link Column
+
+    pagination: 
+      type: Row Ranges X to Y of Z
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: true
+      maximum-rows-per-page: 20
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: false
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 25659892773610379
+      identification: 
+        name: Primary Report
+        alias: 124168
+
+    columns: 
+    - # ====== Column: MONTH =======================================
+      id: 12857592345138731
+      identification: 
+        column-name: MONTH
+        type: Plain Text
+
+      heading: 
+        heading: Month
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 76
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: YEAR ========================================
+      id: 12857683279138732
+      identification: 
+        column-name: YEAR
+        type: Plain Text
+
+      heading: 
+        heading: Year
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 86
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ROWID =======================================
+      id: 14691823926624738
+      identification: 
+        column-name: ROWID
+        type: Hidden
+
+      heading: 
+        heading: Rowid
+
+      layout: 
+        sequence: 96
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TRACK_ID ====================================
+      id: 25633159063575230
+      identification: 
+        column-name: TRACK_ID
+        type: Link
+
+      heading: 
+        heading: Track ID
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 0
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      link: 
+        target: 
+          url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::P3_TRACK_ID,P3_ROWID:#TRACK_ID#,#ROWID#'
+          page: 3 # Daily Budget Entry
+          values: 
+            p3_track_id: '#TRACK_ID#'
+            p3_rowid: '#ROWID#'
+
+        link-text: '#TRACK_ID#'
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: MEAL_DATE ===================================
+      id: 25633578292575231
+      identification: 
+        column-name: MEAL_DATE
+        type: Plain Text
+
+      heading: 
+        heading: Meal Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 2
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_LUNCH_COUNT ===========================
+      id: 25634017932575231
+      identification: 
+        column-name: TOTAL_LUNCH_COUNT
+        type: Hidden
+
+      heading: 
+        heading: Total Lunch Count
+
+      layout: 
+        sequence: 3
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_DINNER_COUNT ==========================
+      id: 25634417829575232
+      identification: 
+        column-name: TOTAL_DINNER_COUNT
+        type: Hidden
+
+      heading: 
+        heading: Total Dinner Count
+
+      layout: 
+        sequence: 4
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_MEALS =================================
+      id: 25634781910575232
+      identification: 
+        column-name: TOTAL_MEALS
+        type: Plain Text
+
+      heading: 
+        heading: Total Meals
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 5
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: DAILY_MEAL_COST =============================
+      id: 25635168096575232
+      identification: 
+        column-name: DAILY_MEAL_COST
+        type: Plain Text
+
+      heading: 
+        heading: Daily Meal Cost
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 6
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COMPANY_SHARE ===============================
+      id: 25635565547575233
+      identification: 
+        column-name: COMPANY_SHARE
+        type: Plain Text
+
+      heading: 
+        heading: Company Share
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 26
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: EMPLOYEE_SHARE ==============================
+      id: 25636041661575233
+      identification: 
+        column-name: EMPLOYEE_SHARE
+        type: Plain Text
+
+      heading: 
+        heading: Employee Share
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 16
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: AVAILABLE_BUDGET ============================
+      id: 25636377817575233
+      identification: 
+        column-name: AVAILABLE_BUDGET
+        type: Plain Text
+
+      heading: 
+        heading: Available Budget
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 36
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: REMAINING_BUDGET ============================
+      id: 25636771099575234
+      identification: 
+        column-name: REMAINING_BUDGET
+        type: Plain Text
+
+      heading: 
+        heading: Remaining Budget
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 46
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: EXTRA_COST ==================================
+      id: 25637252183575234
+      identification: 
+        column-name: EXTRA_COST
+        type: Plain Text
+
+      heading: 
+        heading: Extra Cost
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 56
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    printing: 
+      output: 
+        layout: Default Report Layout
+        view-file-as: Attachment
+
+      page: 
+        size: Letter
+        orientation: Landscape
+        units: Inches
+        width: 11
+        height: 8.5
+        border-width: 0.5
+        border-color: '#666666'
+
+      page-header: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+        page-header-text: Daily Budget Tracker
+
+      column-headings: 
+        font: Helvetica
+        font-weight: Bold
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#EEEEEE'
+
+      columns: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#FFFFFF'
+
+      page-footer: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+
+buttons: 
+- # ====== Button: Create ======================================
+  id: 13248919925597256
+  identification: 
+    button-name: Create
+    label: Create
+
+  layout: 
+    sequence: 30
+    region: Daily Budget Tracker # 25632538559575187
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--success
+    - t-Button--simple
+    - t-Button--pillStart
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:3::'
+      page: 3 # Daily Budget Entry
+      clear-cache: 3
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: Close_Month =================================
+  id: 15377022682574709
+  identification: 
+    button-name: Close_Month
+    label: Close Month
+
+  layout: 
+    sequence: 10
+    region: Daily Budget Tracker # 25632538559575187
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--warning
+    - t-Button--simple
+    - t-Button--padTop
+    - t-Button--padBottom
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 15376817928574707
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Dynamic
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Region
+    region: Daily Budget Tracker # 25632538559575187
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 15376905445574708
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Daily Budget Tracker # 25632538559575187
+
+    execution: 
+      sequence: 10
+      event: New # 15376817928574707
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: PROC_CLOSE_MONTH ===========================
+  id: 9793086451293825
+  identification: 
+    name: PROC_CLOSE_MONTH
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+        v_last_month      NUMBER;
+        v_last_year       NUMBER;
+        v_next_month      NUMBER;
+        v_next_year       NUMBER;
+        v_last_remaining  NUMBER := 0;
+        v_emp_fixed       NUMBER := 0;
+        v_comp_fixed      NUMBER := 0;
+        v_emp_count       NUMBER := 0;
+        v_available       NUMBER := 0;
+        v_exists          NUMBER := 0;
+        v_next_date       DATE;
+      BEGIN
+        ---------------------------------------------------------------------------
+        -- 1️⃣ Get the latest (highest) month/year in the tracker
+        ---------------------------------------------------------------------------
+        SELECT month, year
+          INTO v_last_month, v_last_year
+          FROM (
+                SELECT month, year
+                  FROM PHOENIX_DAILY_BUDGET_TRACKER
+                 ORDER BY year DESC, month DESC
+              )
+         WHERE ROWNUM = 1;
+      
+        ---------------------------------------------------------------------------
+        -- 2️⃣ Get that month’s last remaining budget
+        ---------------------------------------------------------------------------
+        BEGIN
+          SELECT remaining_budget
+            INTO v_last_remaining
+            FROM (
+                  SELECT remaining_budget
+                    FROM PHOENIX_DAILY_BUDGET_TRACKER
+                   WHERE month = v_last_month AND year = v_last_year
+                   ORDER BY meal_date DESC
+                 )
+           WHERE ROWNUM = 1;
+        EXCEPTION
+          WHEN NO_DATA_FOUND THEN
+            v_last_remaining := 0;
+        END;
+      
+        ---------------------------------------------------------------------------
+        -- 3️⃣ Compute next month / year from the last record
+        ---------------------------------------------------------------------------
+        IF v_last_month = 12 THEN
+          v_next_month := 1;
+          v_next_year  := v_last_year + 1;
+        ELSE
+          v_next_month := v_last_month + 1;
+          v_next_year  := v_last_year;
+        END IF;
+      
+        v_next_date := TO_DATE('01-'||v_next_month||'-'||v_next_year,'DD-MM-YYYY');
+      
+        ---------------------------------------------------------------------------
+        -- 4️⃣ Skip if next month already exists
+        ---------------------------------------------------------------------------
+        SELECT COUNT(*)
+          INTO v_exists
+          FROM PHOENIX_DAILY_BUDGET_TRACKER
+         WHERE month = v_next_month AND year = v_next_year;
+      
+        IF v_exists > 0 THEN
+          APEX_ERROR.ADD_ERROR(
+            p_message          => '⚠️ Month '||v_next_month||'/'||v_next_year||' already exists.',
+            p_display_location => APEX_ERROR.c_inline_in_notification
+          );
+          RETURN;
+        END IF;
+      
+        ---------------------------------------------------------------------------
+        -- 5️⃣ Read contributions and employee count
+        ---------------------------------------------------------------------------
+        BEGIN
+        -- Fetch the latest employee and company contributions from the most recent record
+        SELECT NVL(MAX(employee_contribution), 0),
+               NVL(MAX(company_contribution), 0)
+          INTO v_emp_fixed, v_comp_fixed
+          FROM PHOENIX_MEAL_MANAGER
+         WHERE (month, year) IN (
+               SELECT month, year
+                 FROM PHOENIX_MEAL_MANAGER
+                WHERE ROWNUM = 1
+              );
+         EXCEPTION
+           WHEN NO_DATA_FOUND THEN
+             v_emp_fixed := 0;
+             v_comp_fixed := 0;
+        END;
+      
+        SELECT COUNT(*) INTO v_emp_count FROM PHOENIX_HR_EMP_MASTER;
+      
+        ---------------------------------------------------------------------------
+        -- 6️⃣ Compute new month’s opening available budget
+        ---------------------------------------------------------------------------
+        v_available := (v_emp_fixed * v_emp_count)
+                       + v_comp_fixed
+                       + NVL(v_last_remaining,0);
+      
+        ---------------------------------------------------------------------------
+        -- 7️⃣ Insert the new opening record
+        ---------------------------------------------------------------------------
+        INSERT INTO PHOENIX_DAILY_BUDGET_TRACKER (
+            MEAL_DATE,
+            MONTH,
+            YEAR,
+            AVAILABLE_BUDGET,
+            REMAINING_BUDGET,
+            EXTRA_COST,
+            COMPANY_SHARE,
+            EMPLOYEE_SHARE,
+            TOTAL_MEALS,
+            DAILY_MEAL_COST
+        )
+        VALUES (
+            v_next_date,
+            v_next_month,
+            v_next_year,
+            v_available,
+            v_available,
+            0,
+            v_comp_fixed,
+            v_emp_fixed,
+            0,
+            0
+        );
+      
+        COMMIT;
+      
+        ---------------------------------------------------------------------------
+        -- 8️⃣ Success message
+        ---------------------------------------------------------------------------
+        APEX_ERROR.ADD_ERROR(
+          p_message          => '✅ Closed month '||v_last_month||'/'||v_last_year||
+                                '. Created opening for '||TO_CHAR(v_next_date,'Mon YYYY')||
+                                ' with available '||TO_CHAR(v_available,'999,999.00'),
+          p_display_location => APEX_ERROR.c_inline_in_notification
+        );
+      
+      EXCEPTION
+        WHEN OTHERS THEN
+          APEX_ERROR.ADD_ERROR(
+            p_message          => '❌ Error closing month: '||SQLERRM,
+            p_display_location => APEX_ERROR.c_inline_in_notification
+          );
+      END;
+      
+
+  execution: 
+    sequence: 10
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Month closed. Next month selected; carry-forward will auto-apply on the first day.
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: Close_Month # 15377022682574709
+

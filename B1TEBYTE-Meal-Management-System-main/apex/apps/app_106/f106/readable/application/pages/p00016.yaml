@@ -1,0 +1,1172 @@
+---
+# ====== Page: Monthly Budget Information ====================
+id: 16
+identification: 
+  name: Monthly Budget Information
+  alias: MONTHLY-BUDGET-INFORMATION
+  title: Monthly Budget Information
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Monthly Budget Information ==================
+  id: 25948994287270717
+  identification: 
+    name: Monthly Budget Information
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ROWID,
+             BUDGET_ID,
+             BUDGET_DATE,
+             EMPLOYEE_CONTRIBUTION,
+             COMPANY_CONTRIBUTION,
+             EXTRA_DEDUCTION,
+             TOTAL_EXPENSE,
+             USER_ID,
+             ENTRY_DATE,
+             LAST_UPDATE,
+             LAST_UPDATE_DATE,
+             MONTH,
+             YEAR,
+             TOTAL_MEALS
+        from PHOENIX_MONTHLY_BUDGET
+        where month=:P16_MONTH
+        and year=:P16_YEAR
+       
+    page-items-to-submit: 
+    - P16_MONTH
+    - P16_YEAR
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 25949040957270717
+    link: 
+      link-column: Exclude Link Column
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: false
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: false
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 25957264133314591
+      identification: 
+        name: Primary Report
+        alias: 120883
+
+    columns: 
+    - # ====== Column: MONTH =======================================
+      id: 12857792117138733
+      identification: 
+        column-name: MONTH
+        type: Plain Text
+
+      heading: 
+        heading: Month
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 30
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: YEAR ========================================
+      id: 12857875576138734
+      identification: 
+        column-name: YEAR
+        type: Plain Text
+
+      heading: 
+        heading: Year
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 40
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_MEALS =================================
+      id: 12857931332138735
+      identification: 
+        column-name: TOTAL_MEALS
+        type: Plain Text
+
+      heading: 
+        heading: Total Meals
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 50
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ROWID =======================================
+      id: 23659932970543046
+      identification: 
+        column-name: ROWID
+        type: Hidden
+
+      heading: 
+        heading: Rowid
+
+      layout: 
+        sequence: 20
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: BUDGET_ID ===================================
+      id: 25949793010270721
+      identification: 
+        column-name: BUDGET_ID
+        type: Link
+
+      heading: 
+        heading: Budget ID
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 0
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      link: 
+        target: 
+          url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::P17_BUDGET_ID,P17_ROWID:#BUDGET_ID#,#ROWID#'
+          page: 17 # Monthly Budget Entry
+          values: 
+            p17_budget_id: '#BUDGET_ID#'
+            p17_rowid: '#ROWID#'
+
+        link-text: '#BUDGET_ID#'
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: BUDGET_DATE =================================
+      id: 25950027891270721
+      identification: 
+        column-name: BUDGET_DATE
+        type: Plain Text
+
+      heading: 
+        heading: Budget Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 2
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: EMPLOYEE_CONTRIBUTION =======================
+      id: 25950428863270722
+      identification: 
+        column-name: EMPLOYEE_CONTRIBUTION
+        type: Plain Text
+
+      heading: 
+        heading: Employee Contribution
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 3
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COMPANY_CONTRIBUTION ========================
+      id: 25950910880270722
+      identification: 
+        column-name: COMPANY_CONTRIBUTION
+        type: Plain Text
+
+      heading: 
+        heading: Company Contribution
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 4
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: EXTRA_DEDUCTION =============================
+      id: 25951304028270723
+      identification: 
+        column-name: EXTRA_DEDUCTION
+        type: Plain Text
+
+      heading: 
+        heading: Extra Deduction
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 5
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TOTAL_EXPENSE ===============================
+      id: 25951645566270724
+      identification: 
+        column-name: TOTAL_EXPENSE
+        type: Plain Text
+
+      heading: 
+        heading: Total Expense
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 6
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: USER_ID =====================================
+      id: 25952041726270725
+      identification: 
+        column-name: USER_ID
+        type: Hidden
+
+      heading: 
+        heading: User ID
+
+      layout: 
+        sequence: 7
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ENTRY_DATE ==================================
+      id: 25952500464270725
+      identification: 
+        column-name: ENTRY_DATE
+        type: Hidden
+
+      heading: 
+        heading: Entry Date
+
+      layout: 
+        sequence: 8
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: LAST_UPDATE =================================
+      id: 25952899943270726
+      identification: 
+        column-name: LAST_UPDATE
+        type: Hidden
+
+      heading: 
+        heading: Last Update
+
+      layout: 
+        sequence: 9
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: LAST_UPDATE_DATE ============================
+      id: 25953258723270726
+      identification: 
+        column-name: LAST_UPDATE_DATE
+        type: Hidden
+
+      heading: 
+        heading: Last Update Date
+
+      layout: 
+        sequence: 10
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    printing: 
+      output: 
+        layout: Default Report Layout
+        view-file-as: Attachment
+
+      page: 
+        size: Letter
+        orientation: Landscape
+        units: Inches
+        width: 11
+        height: 8.5
+        border-width: 0.5
+        border-color: '#666666'
+
+      page-header: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+        page-header-text: Monthly Budget Information
+
+      column-headings: 
+        font: Helvetica
+        font-weight: Bold
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#EEEEEE'
+
+      columns: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#FFFFFF'
+
+      page-footer: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+
+page-items: 
+- # ====== Page Item: P16_MONTH ================================
+  id: 14017980069354920
+  identification: 
+    name: P16_MONTH
+    type: Select List
+
+  label: 
+    label: Month
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: 1
+    new-column: true
+    column-span: 4
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--xlarge
+    - margin-top-sm
+    - margin-bottom-sm
+    - margin-left-sm
+    - margin-right-sm
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT TO_CHAR(TO_DATE(LEVEL, 'MM'), 'Month', 'NLS_DATE_LANGUAGE=ENGLISH') AS display_value,
+             LEVEL AS return_value
+      FROM dual
+      CONNECT BY LEVEL <= 12
+      ORDER BY LEVEL
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P16_YEAR =================================
+  id: 14018054946354921
+  identification: 
+    name: P16_YEAR
+    type: Select List
+
+  label: 
+    label: Year
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: 5
+    new-column: true
+    column-span: 4
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--xlarge
+    - margin-top-sm
+    - margin-bottom-sm
+    - margin-left-sm
+    - margin-right-sm
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT TO_CHAR(LEVEL + 2020) AS DISPLAY_VALUE,
+             LEVEL + 2020 AS RETURN_VALUE
+      FROM DUAL
+      CONNECT BY LEVEL <= 11
+      ORDER BY RETURN_VALUE;
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: BTN_DOWNLOAD_INVOICE ========================
+  id: 9793107700293826
+  identification: 
+    button-name: BTN_DOWNLOAD_INVOICE
+    label: Download Invoice
+
+  layout: 
+    sequence: 20
+    region: Monthly Budget Information # 25948994287270717
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: CREATE ======================================
+  id: 13873806015249285
+  identification: 
+    button-name: CREATE
+    label: Create
+
+  layout: 
+    sequence: 30
+    region: Monthly Budget Information # 25948994287270717
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.:17::'
+      page: 17 # Monthly Budget Entry
+      clear-cache: 17
+
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+- # ====== Button: Generate_bill ===============================
+  id: 14018150204354922
+  identification: 
+    button-name: Generate_bill
+    label: Generate Bill
+
+  layout: 
+    sequence: 10
+    region: Monthly Budget Information # 25948994287270717
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--success
+    - t-Button--simple
+    - t-Button--padLeft
+    - t-Button--padRight
+    - t-Button--padTop
+    - t-Button--padBottom
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Edit Report - Dialog Closed =========
+  id: 13874446864249297
+  identification: 
+    name: Edit Report - Dialog Closed
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Region
+    region: Monthly Budget Information # 25948994287270717
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 13874908622249298
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Monthly Budget Information # 25948994287270717
+
+    execution: 
+      sequence: 10
+      event: Edit Report - Dialog Closed # 13874446864249297
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: Generate Monthly Invoice PDF ===============
+  id: 9793435262293829
+  identification: 
+    name: Generate Monthly Invoice PDF
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+        v_month       NUMBER := TO_NUMBER(:P16_MONTH);
+        v_year        NUMBER := TO_NUMBER(:P16_YEAR);
+        v_month_name  VARCHAR2(20) := TO_CHAR(TO_DATE(v_month, 'MM'), 'FMMonth');
+        v_file_name   VARCHAR2(120);
+        v_export      APEX_DATA_EXPORT.T_EXPORT;
+        v_context     APEX_EXEC.T_CONTEXT;
+        v_cnt         NUMBER;
+        v_sql         CLOB;
+      BEGIN
+        ---------------------------------------------------------------------
+        -- Step 1: Check data exists for selected month/year
+        ---------------------------------------------------------------------
+        SELECT COUNT(*) INTO v_cnt
+        FROM PHOENIX_MONTHLY_BUDGET
+        WHERE MONTH = v_month AND YEAR = v_year;
+      
+        IF v_cnt = 0 THEN
+          APEX_ERROR.ADD_ERROR(
+            p_message          => 'No invoice data found for ' || v_month_name || ' ' || v_year || '.',
+            p_display_location => APEX_ERROR.c_inline_in_notification
+          );
+          RETURN;
+        END IF;
+      
+        ---------------------------------------------------------------------
+        -- Step 2: Build SQL dynamically (no bind types needed)
+        ---------------------------------------------------------------------
+        v_sql :=
+          'SELECT
+             BUDGET_ID,
+             TO_CHAR(BUDGET_DATE, ''DD-Mon-YYYY'')            AS "Budget Date",
+             TOTAL_MEALS                                      AS "Total Meals",
+             EMPLOYEE_CONTRIBUTION                            AS "Employee Contribution",
+             COMPANY_CONTRIBUTION                             AS "Company Contribution",
+             EXTRA_DEDUCTION                                  AS "Extra Deduction",
+             TOTAL_EXPENSE                                    AS "Total Expense",
+             USER_ID                                          AS "Generated By",
+             TO_CHAR(ENTRY_DATE, ''DD-Mon-YYYY HH24:MI'')     AS "Generated On"
+           FROM PHOENIX_MONTHLY_BUDGET
+           WHERE MONTH = ' || v_month || ' AND YEAR = ' || v_year;
+      
+        ---------------------------------------------------------------------
+        -- Step 3: Open query context and export
+        ---------------------------------------------------------------------
+        v_context := APEX_EXEC.OPEN_QUERY_CONTEXT(
+          p_location  => APEX_EXEC.C_LOCATION_LOCAL_DB,
+          p_sql_query => v_sql
+        );
+      
+        v_export := APEX_DATA_EXPORT.EXPORT(
+          p_context     => v_context,
+          p_format      => APEX_DATA_EXPORT.C_FORMAT_PDF,
+          p_file_name   => 'BiteByte_Invoice_' || v_month_name || '_' || v_year || '.pdf',
+          p_page_header => 'B1TEBYTE | Monthly Meal Invoice - ' || v_month_name || ' ' || v_year,
+          p_page_footer => '© 2025 BiteByte Meal Management System | Created By: Nayan, Nargis, Mishal, Sabrina'
+        );
+      
+        ---------------------------------------------------------------------
+        -- Step 4: Close context and stream PDF
+        ---------------------------------------------------------------------
+        APEX_EXEC.CLOSE(v_context);
+        APEX_DATA_EXPORT.DOWNLOAD(v_export);
+      END;
+      
+
+  execution: 
+    sequence: 20
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: BTN_DOWNLOAD_INVOICE # 9793107700293826
+
+- # ====== Process: GENERATE BILL ==============================
+  id: 14691208070624732
+  identification: 
+    name: GENERATE BILL
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+        v_month_name        VARCHAR2(20) := INITCAP(:P16_MONTH);
+        v_year_text         VARCHAR2(10) := :P16_YEAR;
+        v_month             NUMBER;
+        v_year              NUMBER;
+        v_budget_id         VARCHAR2(15);
+        v_emp_contri        NUMBER := 0;
+        v_comp_contri       NUMBER := 0;
+        v_extra_deduct      NUMBER := 0;
+        v_total_meals       NUMBER := 0;
+        v_total_expense     NUMBER := 0;
+        v_emp_count         NUMBER := 0;
+      BEGIN
+        --------------------------------------------------------------------
+        -- 🧮 Step 0: Convert Month Text to Number safely
+        --------------------------------------------------------------------
+        BEGIN
+          v_month := TO_NUMBER(:P16_MONTH);
+          v_month_name := TO_CHAR(TO_DATE(v_month, 'MM'), 'Month');
+          v_year := TO_NUMBER(v_year_text);
+        EXCEPTION
+          WHEN OTHERS THEN
+            APEX_ERROR.ADD_ERROR(
+              p_message => 'Invalid month name: ' || v_month_name,
+              p_display_location => APEX_ERROR.c_inline_in_notification,
+              p_page_item_name => 'P16_MONTH'
+            );
+            RETURN;
+        END;
+      
+        v_year := TO_NUMBER(v_year_text);
+      
+        --------------------------------------------------------------------
+        -- 🧹 Step 1: Delete old record for this month/year (if any)
+        --------------------------------------------------------------------
+        DELETE FROM PHOENIX_MONTHLY_BUDGET
+         WHERE MONTH = v_month
+           AND YEAR  = v_year;
+      
+        --------------------------------------------------------------------
+        -- 🧾 Step 2: Aggregate daily budget data
+        --------------------------------------------------------------------
+        SELECT 
+          NVL(SUM(TOTAL_MEALS), 0),
+          NVL(SUM(EXTRA_COST), 0),
+          NVL(MAX(EMPLOYEE_SHARE), 0),
+          NVL(MAX(COMPANY_SHARE), 0)
+        INTO 
+          v_total_meals,
+          v_extra_deduct,
+          v_emp_contri,
+          v_comp_contri
+        FROM PHOENIX_DAILY_BUDGET_TRACKER
+        WHERE EXTRACT(MONTH FROM MEAL_DATE) = v_month
+          AND EXTRACT(YEAR  FROM MEAL_DATE) = v_year;
+      
+        --------------------------------------------------------------------
+        -- 💰 Step 3: Calculate total expense
+        --------------------------------------------------------------------
+        v_total_expense := v_emp_contri + v_comp_contri + v_extra_deduct;
+      
+        --------------------------------------------------------------------
+        -- 🆔 Step 4: Generate Budget ID and Insert
+        --------------------------------------------------------------------
+        v_budget_id := 'BDG-' || LPAD(PHOENIX_MONTHLY_BUDGET_SEQ.NEXTVAL, 6, '0');
+      
+        INSERT INTO PHOENIX_MONTHLY_BUDGET (
+            BUDGET_ID,
+            BUDGET_DATE,
+            MONTH,
+            YEAR,
+            EMPLOYEE_CONTRIBUTION,
+            COMPANY_CONTRIBUTION,
+            EXTRA_DEDUCTION,
+            TOTAL_EXPENSE,
+            TOTAL_MEALS,
+            USER_ID,
+            ENTRY_DATE
+        )
+        VALUES (
+            v_budget_id,
+            TRUNC(SYSDATE),
+            v_month,
+            v_year,
+            v_emp_contri,
+            v_comp_contri,
+            v_extra_deduct,
+            v_total_expense,
+            v_total_meals,
+            :APP_USER,
+            SYSDATE
+        );
+      
+        COMMIT;
+      
+      APEX_APPLICATION.G_PRINT_SUCCESS_MESSAGE := '✅ Bill generated successfully for ' || v_month_name || ' ' || v_year;
+      
+      EXCEPTION
+        WHEN OTHERS THEN
+          APEX_ERROR.ADD_ERROR(
+            p_message => 'Error generating bill: ' || SQLERRM,
+            p_display_location => APEX_ERROR.c_inline_in_notification
+          );
+      END;
+
+  execution: 
+    sequence: 10
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+

@@ -1,0 +1,15 @@
+------------------------------------------------------------
+-- Trigger: TRG_PHOENIX_ATTENDANCE_ID
+-- Purpose: Auto-generate ATTENDANCE_ID as 'ATD-000000'
+------------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER TRG_PHOENIX_ATTENDANCE_ID
+BEFORE INSERT ON PHOENIX_DAILY_ATTENDANCE
+FOR EACH ROW
+BEGIN
+  IF :NEW.ATTENDANCE_ID IS NULL THEN
+    :NEW.ATTENDANCE_ID := 'ATD-' || LPAD(SEQ_PHOENIX_ATTENDANCE_ID.NEXTVAL, 6, '0');
+  END IF;
+END;
+/
+ALTER TRIGGER TRG_PHOENIX_ATTENDANCE_ID ENABLE;

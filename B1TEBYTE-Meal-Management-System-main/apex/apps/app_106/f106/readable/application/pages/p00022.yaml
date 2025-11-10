@@ -1,0 +1,316 @@
+---
+# ====== Page: About BiteByte ================================
+id: 22
+identification: 
+  name: About BiteByte
+  alias: ABOUT-BITEBYTE
+  title: About BiteByte
+
+appearance: 
+  page-mode: Normal
+  page-template: Minimal (No Navigation)
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+javascript: 
+  execute-when-page-loads: |
+    function showToast() {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+    
+
+css: 
+  inline: |
+    /* General reset for this page */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: radial-gradient(circle at top left, #1f2937, #111827);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+    
+    /* Center container */
+    .bb-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+    }
+    
+    /* Glass card */
+    .bb-card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      padding: 20px 10px;
+      border-radius: 20px;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    
+    /* Logo */
+    .bb-logo {
+      width: 90px;
+      margin-bottom: 15px;
+    }
+    
+    /* Title */
+    .bb-card h1 {
+      font-size: 2.3em;
+      margin: 10px 0;
+      color: #fff;
+    }
+    .bb-card h1 span {
+      color: #00d0ff;
+    }
+    
+    /* Paragraph */
+    .bb-card p {
+      font-size: 1.05em;
+      color: #cfcfcf;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    
+    /* Features */
+    .bb-features {
+      text-align: left;
+      margin-top: 15px;
+    }
+    .bb-feature {
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #00d0ff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      transition: transform 0.2s ease;
+    }
+    .bb-feature:hover {
+      transform: scale(1.02);
+    }
+    
+    /* Button */
+    .bb-btn {
+      background: linear-gradient(90deg, #00c3ff, #0072ff);
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: 0.3s;
+    }
+    .bb-btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(90deg, #0072ff, #00c3ff);
+    }
+    
+    /* Toast */
+    #toast {
+      visibility: hidden;
+      background: #00c3ff;
+      color: white;
+      border-radius: 8px;
+      padding: 12px 18px;
+      position: fixed;
+      bottom: 35px;
+      right: 30px;
+      opacity: 0;
+      transition: all 0.5s;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    /* --- FEATURE ROW --- */
+    .bb-feature-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      padding: 0 10px;
+      position: relative;
+    }
+    
+    /* --- FEATURE CARD --- */
+    .bb-feature-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      width: 300px;
+      min-height: 115px;
+      padding: 14px 12px;
+      text-align: center;
+      border-top: 3px solid #00bfff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      transition: all 0.25s ease;
+      transform: scale(1);
+      transform-origin: center;
+      overflow: hidden;
+      position: relative;
+      z-index: 0; /* Ensures all start at same layer */
+    }
+    
+    /* --- CONSISTENT HOVER EFFECT --- */
+    .bb-feature-card:hover {
+      transform: translateY(-1px);
+      background: rgba(0, 191, 255, 0.10);
+      box-shadow: 0 0 16px rgba(0, 191, 255, 0.45);
+      border-top-color: #00bfff;
+      z-index: 5; /* Lifted above siblings without overlapping tint */
+    }
+    
+    /* --- TEXT --- */
+    .bb-feature-card h3 {
+      color: #00bfff;
+      margin-bottom: 8px;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    
+    .bb-feature-card p {
+      color: #cccccc;
+      font-size: 0.9em;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    /* --- EQUAL HEIGHT ALIGNMENT --- */
+    .bb-feature-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    /* --- RESPONSIVE --- */
+    @media (max-width: 650px) {
+      .bb-feature-row {
+        flex-wrap: wrap;
+      }
+      .bb-feature-card {
+        width: 80%;
+        margin-bottom: 12px;
+      }
+    }
+    
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: BiteByte ====================================
+  id: 23338066368293108
+  identification: 
+    name: BiteByte
+    type: Static Content
+
+  source: 
+    html-code: |
+      <div class="bb-container">
+        <div class="bb-card">
+          <img class="bb-logo" src="#APP_IMAGES#app-106-logo.png" alt="BiteByte Logo">
+          <h1>Welcome to <span>BiteByte</span></h1>
+          <p>
+            <b>Hungry for smarter meal management? </b>
+            
+            BiteByte serves up the perfect recipe.
+            <br>
+            Plan meals, Balance budgets, and Track costs effortlessly.
+            <br>
+            Cooked to perfection by Phoenix, where great ideas rise just like great meals. </p>
+      
+          <div class="bb-feature-row">
+          <div class="bb-feature-card">
+              <h3>Smart Menu</h3>
+              <p>Plan daily meals and track real-time costs</p>
+          </div>
+      
+          <div class="bb-feature-card">
+              <h3>Budget Insights</h3>
+              <p>Balance employee and company contributions</p>
+          </div>
+      
+          <div class="bb-feature-card">
+              <h3>Transparency</h3>
+              <p>View your meal history and deductions</p>
+          </div>
+          </div>
+      
+      
+          <button class="bb-btn" onclick="showToast()">Explore More</button>
+        </div>
+        <div id="toast">Coming soon — new BiteByte features 🍔</div>
+      </div>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+

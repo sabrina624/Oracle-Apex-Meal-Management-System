@@ -1,0 +1,870 @@
+---
+# ====== Page: Dashboard  ====================================
+id: 21
+identification: 
+  name: 'Dashboard '
+  alias: DASHBOARD
+  title: 'Dashboard '
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    .test-card .t-Cards-item {
+        background-color: red !important;
+    }
+    
+    
+    
+    
+    
+    .my-card-value {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+    
+    .my-card-value H4 {
+        font-size: large;
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Total Meals Per Day =========================
+  id: 27318412561507270
+  identification: 
+    name: Total Meals Per Day
+    type: Chart
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: PHOENIX_DAILY_BUDGET_TRACKER
+    include-rowid-column: false
+    page-items-to-submit: 
+    - P21_MONTH
+    - P21_YEAR
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 80
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 15228429412422556
+    chart: 
+      type: Area
+
+    appearance: 
+      orientation: Vertical
+      stack: false
+
+    layout: 
+      height: 400
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: true
+
+    multi-series-chart-data: 
+      fill-gaps-in-chart-data: true
+      sort-order: Label - Ascending
+      render-gap-as-zero: true
+
+    settings: 
+      zoom-and-scroll: No
+
+    animation: 
+      on-display: Automatic
+      on-data-change: Automatic
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-group-name: true
+      show-value: true
+
+    legend: 
+      show: false
+
+    series: 
+    - # ====== Series: series 3 ====================================
+      id: 15230785863422557
+      identification: 
+        name: series 3
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: Table / View
+        table-owner: Parsing Schema
+        table-name: PHOENIX_DAILY_BUDGET_TRACKER
+        include-rowid-column: false
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: MEAL_DATE
+        value-aggregation: No Aggregation
+        value: TOTAL_MEALS
+
+      appearance: 
+        color: '#00e5ff'
+        assigned-to-y2-axis: false
+
+      line: 
+        type: Automatic
+
+      marker: 
+        show: Automatic
+        shape: Automatic
+
+      label: 
+        show: false
+
+      performance: 
+        maximum-rows-to-process: 50
+
+    axes: 
+    - # ====== Axis: x =============================================
+      id: 15228965403422557
+      identification: 
+        name: x
+        show-axis: true
+        title: Regular Date
+
+      title: 
+        font-family: Arial
+        font-style: Normal
+        font-size: 12
+
+      value: 
+        format-scaling: Automatic
+        baseline-scaling: Zero
+        scale: Linear
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+        rotation: true
+        position: Outside
+
+    - # ====== Axis: y =============================================
+      id: 15229514947422557
+      identification: 
+        name: y
+        show-axis: true
+        title: Total Meals
+
+      value: 
+        format: Decimal
+        decimal-places: 0
+        format-scaling: None
+        baseline-scaling: Zero
+        scale: Linear
+
+      appearance: 
+        position: Automatic
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+
+    - # ====== Axis: y2 ============================================
+      id: 15230169959422557
+      identification: 
+        name: y2
+        show-axis: false
+        title: Total Meals
+
+      value: 
+        format-scaling: Automatic
+        baseline-scaling: Zero
+        scale: Linear
+
+      appearance: 
+        position: Automatic
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+
+      dual-y-axes: 
+        show: Automatic
+
+- # ====== Region: Overview Of Meal Cost =======================
+  id: 28316058628001682
+  identification: 
+    name: Overview Of Meal Cost
+    title: Overview Of Meal Cost
+    type: Chart
+
+  source: 
+    location: None
+    page-items-to-submit: 
+    - P21_MONTH
+    - P21_YEAR
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 6
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 15224237258422545
+    chart: 
+      type: Bar
+
+    appearance: 
+      orientation: Vertical
+      stack: false
+
+    layout: 
+      height: 400
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: true
+
+    multi-series-chart-data: 
+      fill-gaps-in-chart-data: true
+      sort-order: Label - Ascending
+      render-gap-as-zero: true
+
+    settings: 
+      zoom-and-scroll: No
+
+    animation: 
+      on-display: Automatic
+      on-data-change: Automatic
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-group-name: true
+      show-value: true
+
+    legend: 
+      show: false
+
+    series: 
+    - # ====== Series: Series 1 ====================================
+      id: 15225903804422552
+      identification: 
+        name: Series 1
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          SELECT 
+              TO_CHAR(MEAL_DATE, 'DD-Mon-YYYY') AS LABEL,
+              NVL(SUM(TOTAL_MEALS * DAILY_MEAL_COST), 0) AS VALUE
+          FROM PHOENIX_DAILY_BUDGET_TRACKER
+          WHERE MONTH = NVL(:P21_MONTH, TO_NUMBER(TO_CHAR(SYSDATE, 'MM')))
+            AND YEAR  = NVL(:P21_YEAR,  TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')))
+          GROUP BY MEAL_DATE
+          ORDER BY MEAL_DATE;
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: LABEL
+        value: VALUE
+
+      appearance: 
+        assigned-to-y2-axis: false
+
+      label: 
+        show: false
+
+    axes: 
+    - # ====== Axis: x =============================================
+      id: 15224793197422548
+      identification: 
+        name: x
+        show-axis: true
+        title: Date
+
+      value: 
+        format-scaling: Automatic
+        baseline-scaling: Zero
+        scale: Linear
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+        rotation: true
+        position: Outside
+
+    - # ====== Axis: y =============================================
+      id: 15225341312422549
+      identification: 
+        name: y
+        show-axis: true
+        title: Daily Meal Cost
+
+      value: 
+        format: Decimal
+        decimal-places: 0
+        format-scaling: None
+        baseline-scaling: Zero
+        scale: Linear
+
+      appearance: 
+        position: Automatic
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+
+- # ====== Region: Overview Of Budget Summary ==================
+  id: 28316515200001687
+  identification: 
+    name: Overview Of Budget Summary
+    title: Overview Of Budget Summary
+    type: Chart
+
+  source: 
+    location: None
+    page-items-to-submit: 
+    - P21_MONTH
+    - P21_YEAR
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 6
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 15226983936422554
+    chart: 
+      type: Pie
+
+    layout: 
+      height: 400
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: true
+
+    settings: 
+      pie-selection-effect: Highlight
+
+    value: 
+      pie-chart-other-threshold: 0
+      format: Decimal
+      decimal-places: 0
+      format-scaling: None
+
+    animation: 
+      on-display: Automatic
+      on-data-change: Automatic
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-value: true
+
+    legend: 
+      show: true
+      position: Automatic
+      hide-and-show-behavior: Rescale
+
+    series: 
+    - # ====== Series: Series 2 ====================================
+      id: 15227459564422555
+      identification: 
+        name: Series 2
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          SELECT 
+              'Available Budget' AS LABEL,
+              NVL(SUM(AVAILABLE_BUDGET), 0) AS VALUE
+          FROM PHOENIX_DAILY_BUDGET_TRACKER
+          WHERE MONTH = NVL(:P21_MONTH, TO_NUMBER(TO_CHAR(SYSDATE, 'MM')))
+            AND YEAR  = NVL(:P21_YEAR,  TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')))
+          UNION ALL
+          SELECT 
+              'Remaining Budget',
+              NVL(SUM(REMAINING_BUDGET), 0)
+          FROM PHOENIX_DAILY_BUDGET_TRACKER
+          WHERE MONTH = NVL(:P21_MONTH, TO_NUMBER(TO_CHAR(SYSDATE, 'MM')))
+            AND YEAR  = NVL(:P21_YEAR,  TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')))
+          UNION ALL
+          SELECT 
+              'Extra Cost',
+              NVL(SUM(EXTRA_COST), 0)
+          FROM PHOENIX_DAILY_BUDGET_TRACKER
+          WHERE MONTH = NVL(:P21_MONTH, TO_NUMBER(TO_CHAR(SYSDATE, 'MM')))
+            AND YEAR  = NVL(:P21_YEAR,  TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')));
+          
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: LABEL
+        value: VALUE
+
+      label: 
+        show: true
+        position: Automatic
+        display-as: Label
+
+- # ====== Region: Budget Summary ==============================
+  id: 28557609513360479
+  identification: 
+    name: Budget Summary
+    title: Budget Summary
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      SELECT 
+          'Available Budget' AS CARD_TITLE,
+          TO_CHAR(NVL(SUM(PDBT.AVAILABLE_BUDGET), 0), 'FM9G999G990D00') AS CARD_VALUE,
+          'fa-wallet' AS CARD_ICON,
+          't-Card-icon--success' AS ICON_COLOR_CLASS
+      FROM PHOENIX_DAILY_BUDGET_TRACKER PDBT
+      WHERE TO_CHAR(PDBT.MEAL_DATE, 'MM') = NVL(:MONTH, TO_CHAR(SYSDATE, 'MM'))
+        AND TO_CHAR(PDBT.MEAL_DATE, 'YYYY') = NVL(:YEAR, TO_CHAR(SYSDATE, 'YYYY'))
+      
+      UNION ALL
+      
+      SELECT 
+          'Total Cost' AS CARD_TITLE,
+          TO_CHAR(NVL(SUM(PDBT.TOTAL_MEALS * PDBT.DAILY_MEAL_COST), 0), 'FM9G999G990D00') AS CARD_VALUE,
+          'fa-coins' AS CARD_ICON,
+          't-Card-icon--warning' AS ICON_COLOR_CLASS
+      FROM PHOENIX_DAILY_BUDGET_TRACKER PDBT
+      WHERE TO_CHAR(PDBT.MEAL_DATE, 'MM') = NVL(:MONTH, TO_CHAR(SYSDATE, 'MM'))
+        AND TO_CHAR(PDBT.MEAL_DATE, 'YYYY') = NVL(:YEAR, TO_CHAR(SYSDATE, 'YYYY'))
+      
+      UNION ALL
+      
+      SELECT 
+          'Remaining Budget' AS CARD_TITLE,
+          TO_CHAR(NVL(SUM(PDBT.REMAINING_BUDGET), 0), 'FM9G999G990D00') AS CARD_VALUE,
+          'fa-piggy-bank' AS CARD_ICON,
+          't-Card-icon--danger' AS ICON_COLOR_CLASS
+      FROM PHOENIX_DAILY_BUDGET_TRACKER PDBT
+      WHERE TO_CHAR(PDBT.MEAL_DATE, 'MM') = NVL(:P21_MONTH, TO_CHAR(SYSDATE, 'MM'))
+        AND TO_CHAR(PDBT.MEAL_DATE, 'YYYY') = NVL(:P21_YEAR, TO_CHAR(SYSDATE,'YYYY'));
+    page-items-to-submit: 
+    - P21_MONTH
+    - P21_YEAR
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--hideHeader js-addHiddenHeadingRoleDesc
+    - t-CardsRegion--styleB
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 15231783028422560
+    appearance: 
+      layout: Grid
+      grid-columns: 3 Columns
+      css-classes: 
+      - my-card-value
+
+    title: 
+      advanced-formatting: false
+      column: CARD_TITLE
+
+    subtitle: 
+      advanced-formatting: false
+
+    body: 
+      advanced-formatting: false
+      column: CARD_VALUE
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+page-items: 
+- # ====== Page Item: P21_MONTH ================================
+  id: 9794776247293842
+  identification: 
+    name: P21_MONTH
+    type: Select List
+
+  label: 
+    label: Month
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: Submit Page
+    execute-validations: true
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Budget Summary # 28557609513360479
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--xlarge
+    - margin-top-sm
+    - margin-bottom-sm
+    - margin-left-sm
+    - margin-right-sm
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT TO_CHAR(TO_DATE(LEVEL, 'MM'), 'Month') AS DISPLAY_VALUE,
+             LEVEL AS RETURN_VALUE
+      FROM dual
+      CONNECT BY LEVEL <= 12
+      ORDER BY LEVEL;
+      
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: TO_NUMBER(TO_CHAR(SYSDATE, 'MM'))
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P21_YEAR =================================
+  id: 9794844741293843
+  identification: 
+    name: P21_YEAR
+    type: Select List
+
+  label: 
+    label: New
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: Submit Page
+    execute-validations: true
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 20
+    region: Budget Summary # 28557609513360479
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--xlarge
+    - margin-top-sm
+    - margin-bottom-sm
+    - margin-left-sm
+    - margin-right-sm
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT EXTRACT(YEAR FROM MEAL_DATE) AS display_value,
+             EXTRACT(YEAR FROM MEAL_DATE) AS return_value
+      FROM PHOENIX_DAILY_BUDGET_TRACKER
+      GROUP BY EXTRACT(YEAR FROM MEAL_DATE)
+      ORDER BY 1 DESC
+      
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY'))
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 15380310785574742
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P21_MONTH
+    - P21_YEAR
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 15380441127574743
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Budget Summary # 28557609513360479
+
+    execution: 
+      sequence: 10
+      event: New # 15380310785574742
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
